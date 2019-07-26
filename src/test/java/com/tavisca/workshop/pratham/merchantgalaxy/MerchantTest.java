@@ -1,5 +1,6 @@
 package com.tavisca.workshop.pratham.merchantgalaxy;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
@@ -13,49 +14,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MerchantTest {
 
-    private static List<String> inputStatements = Collections.unmodifiableList(
-            new ArrayList<>(Arrays.asList(
-                    "glob is I",
+    Merchant merchant;
 
-                    "prok is V",
-
-                    "pish is X",
-
-                    "tegj is L",
-
-                    "glob glob Silver is 34 Credits",
-
-                    "glob prok Gold is 57800 Credits",
-
-                    "pish pish Iron is 3910 Credits",
-
-                    "how much is pish tegj glob glob ?",
-
-                    "how many Credits is glob prok Silver ?",
-
-                    "how many Credits is glob prok Gold ?",
-
-                    "how many Credits is glob prok Iron ?",
-
-                    "how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"
-            )));
-    private List<String> outputStatements = Collections.unmodifiableList(
-            new ArrayList<>(Arrays.asList(
-                    "pish tegj glob glob is 42",
-
-                    "glob prok Silver is 68 Credits",
-
-                    "glob prok Gold is 57800 Credits",
-
-                    "glob prok Iron is 782 Credits",
-
-                    "I have no idea what you are talking about"
-            )));
+    @BeforeEach
+    public void initialize(){
+       merchant = new Merchant();
+    }
 
     @Test
     public void canTranslateForeignWordToRomanLiteral() {
         try {
-            Merchant merchant = new Merchant();
             merchant.query("glob is I");
 
             assertEquals('I', merchant.toRomanLiteral("glob"));
@@ -67,7 +35,6 @@ public class MerchantTest {
     @Test
     public void canCalculateCreditsForGivenItem() {
         try {
-            Merchant merchant = new Merchant();
             merchant.query("glob is I");
             merchant.query("glob glob Silver is 34 Credits");
 
@@ -80,7 +47,6 @@ public class MerchantTest {
     @Test
     public void canAnswerQuestionsOfTypeHowMuch() {
         try {
-            Merchant merchant = new Merchant();
             merchant.query("glob is I");
             merchant.query("prok is V");
             merchant.query("pish is X");
@@ -97,7 +63,6 @@ public class MerchantTest {
     @Test
     public void canAnswerQuestionsOfTypeHowMany() {
         try {
-            Merchant merchant = new Merchant();
             merchant.query("glob is I");
             merchant.query("prok is V");
             merchant.query("pish is X");
@@ -115,20 +80,59 @@ public class MerchantTest {
         }
     }
 
-    @Test void respondsWithNoIdeaMessageForInvalidQuestionStatement(){
-        try{
-            Merchant merchant = new Merchant();
+    @Test
+    void respondsWithNoIdeaMessageForInvalidQuestionStatement() {
+        try {
             assertEquals("I have no idea what you are talking about",
                     merchant.query("how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"));
-        }catch (ParseException e){
+        } catch (ParseException e) {
             fail();
         }
     }
 
     @Test
     void canProcessAListOfQuery() {
+
+        List<String> inputStatements = Collections.unmodifiableList(
+                new ArrayList<>(Arrays.asList(
+                        "glob is I",
+
+                        "prok is V",
+
+                        "pish is X",
+
+                        "tegj is L",
+
+                        "glob glob Silver is 34 Credits",
+
+                        "glob prok Gold is 57800 Credits",
+
+                        "pish pish Iron is 3910 Credits",
+
+                        "how much is pish tegj glob glob ?",
+
+                        "how many Credits is glob prok Silver ?",
+
+                        "how many Credits is glob prok Gold ?",
+
+                        "how many Credits is glob prok Iron ?",
+
+                        "how much wood could a woodchuck chuck if a woodchuck could chuck wood ?"
+                )));
+        List<String> outputStatements = Collections.unmodifiableList(
+                new ArrayList<>(Arrays.asList(
+                        "pish tegj glob glob is 42",
+
+                        "glob prok Silver is 68 Credits",
+
+                        "glob prok Gold is 57800 Credits",
+
+                        "glob prok Iron is 782 Credits",
+
+                        "I have no idea what you are talking about"
+                )));
+
         try {
-            Merchant merchant = new Merchant();
             List<String> responses = new ArrayList<>();
 
             for (String statement : inputStatements) {
@@ -143,5 +147,4 @@ public class MerchantTest {
             fail();
         }
     }
-
 }

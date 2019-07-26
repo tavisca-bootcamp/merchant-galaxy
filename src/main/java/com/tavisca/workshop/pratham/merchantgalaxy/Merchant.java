@@ -1,11 +1,10 @@
 package com.tavisca.workshop.pratham.merchantgalaxy;
 
-import com.tavisca.workshop.pratham.merchantgalaxy.parser.ItemCreditsStatementParser;
-import com.tavisca.workshop.pratham.merchantgalaxy.parser.QuestionStatementParser;
-import com.tavisca.workshop.pratham.merchantgalaxy.parser.ForeignVocabularyStatementParser;
+import com.tavisca.workshop.pratham.merchantgalaxy.parser.StatementParser;
 import com.tavisca.workshop.pratham.merchantgalaxy.util.RomanArabicConverter;
 
 import java.security.InvalidParameterException;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,7 +39,7 @@ public class Merchant {
     private String handleQuestion(String question) throws ParseException {
         String[] tokens;
         try{
-            tokens = QuestionStatementParser.parse(question);
+            tokens = StatementParser.parseQuestionStatement(question);
             if(tokens.length == 0)
                 return RESPONSE_NO_IDEA;
         }catch (ParseException e){
@@ -74,7 +73,7 @@ public class Merchant {
     }
 
     private void handleItemCreditsStatement(String statement) throws ParseException {
-        String[] foreignWordsItemCredits = ItemCreditsStatementParser.parse(statement);
+        String[] foreignWordsItemCredits = StatementParser.parseItemCreditsStatement(statement);
         int size = foreignWordsItemCredits.length;
 
         String[] foreignWords = Arrays.copyOf(foreignWordsItemCredits, size - 2);
@@ -102,7 +101,7 @@ public class Merchant {
     }
 
     private void handleForeignVocabularyStatement(String statement) throws ParseException{
-        String[] foreignWordRomanLiteral = ForeignVocabularyStatementParser.parse(statement);
+        String[] foreignWordRomanLiteral = StatementParser.parseForeignVocabularyStatement(statement);
 
         if (isRomanLiteral(foreignWordRomanLiteral[1]))
             foreignWordToRomanLiteralMap.put(foreignWordRomanLiteral[0], foreignWordRomanLiteral[1].charAt(0));
