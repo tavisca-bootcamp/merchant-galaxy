@@ -17,6 +17,7 @@ public class RomanArabicConverter {
                 put('D', 500);
                 put('M', 1000);
             }});
+    public static final String ROMAN_NUMERAL_REGEX_PATTERN = "^(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$";
 
     public static int toArabic(char[] literals) throws ParseException {
 
@@ -37,7 +38,7 @@ public class RomanArabicConverter {
     }
 
     private static boolean isValid(String romanNumerial) {
-        return romanNumerial.matches("^(?=[MDCLXVI])M*(C[MD]|D?C{0,3})(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$");
+        return romanNumerial.matches(ROMAN_NUMERAL_REGEX_PATTERN);
     }
 
     private static boolean canSubtract(char literalA, char literalB) {

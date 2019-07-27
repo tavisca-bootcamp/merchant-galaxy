@@ -17,7 +17,6 @@ public abstract class StatementParser {
         int numberIndex = -1;
 
         for (int i = 0; i < words.length; i++) {
-            //TODO: check should be before "is"
             if (words[i].equals("is"))
                 indexOfIs = i;
             else if (isNumber(words[i])) {
