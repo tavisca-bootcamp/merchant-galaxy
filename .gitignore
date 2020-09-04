@@ -3,6 +3,21 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+gradle/
+build/
+build.gradle.kts
+gradlew
+gradlew.bat
+
+
+ghwa
+.gradle
+<<<<<<< HEAD
+build
+=======
+/build
+>>>>>>> 4a6d6f268c11be2c07fe494da6a7d9ea0e5f5e52
+
 # User-specific files
 *.suo
 *.user
