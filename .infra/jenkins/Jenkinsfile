@@ -1,0 +1,54 @@
+pipeline  {
+    agent any
+    stages  {
+        stage('Build')  {
+            steps  {
+                sh script: '''
+		echo "Building Stage"
+		chmod +x ./gradlew
+		./gradlew build -x test
+		''',
+		label: "Build"
+            }
+        }
+	stage('Test')  {
+	    steps  {
+		sh script: '''
+		echo "Testing Stage"
+		./gradlew test
+		''',
+		label: "Test"
+	    }
+	}
+	stage('Static Code Analysis')  {
+	    steps  {
+		sh script: '''
+		./gradlew sonarqube \
+		-Dsonar.projectKey=tavisca-dsheth_merchant-galaxy \
+		-Dsonar.organization=tavisca-dsheth \
+		-Dsonar.host.url=https://sonarcloud.io \
+		-Dsonar.login=8e2fb63c0e4df521e0c5b0620f4817ad3712a877
+		''',
+		label: "Code Coverage Analysis"
+	    }
+	}
+	stage('Build Docker')  {
+	    steps  {
+		sh script: '''
+		docker build -t "merchantgalaxy" -f .infra/docker/Dockerfile .
+		''',
+		label: "Build docker image"
+	    }
+	}
+	stage('Publish Docker Image')  {
+	    steps  {
+		sh script: '''
+		docker login -u dhvani2510 -p hjdj@0389
+		docker tag merchantgalaxy:latest dhvani2510/merchant_galaxy:latest
+		docker push dhvani2510/merchant_galaxy:latest
+		''',
+		label: "Publish"
+	    }
+	}
+    }
+}
