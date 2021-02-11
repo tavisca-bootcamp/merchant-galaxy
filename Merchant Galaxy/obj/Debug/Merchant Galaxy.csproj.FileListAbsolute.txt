@@ -1,0 +1,7 @@
+C:\Users\asisodiya\source\repos\Merchant Galaxy\Merchant Galaxy\bin\Debug\Merchant Galaxy.exe.config
+C:\Users\asisodiya\source\repos\Merchant Galaxy\Merchant Galaxy\bin\Debug\Merchant Galaxy.exe
+C:\Users\asisodiya\source\repos\Merchant Galaxy\Merchant Galaxy\bin\Debug\Merchant Galaxy.pdb
+C:\Users\asisodiya\source\repos\Merchant Galaxy\Merchant Galaxy\obj\Debug\Merchant Galaxy.csprojAssemblyReference.cache
+C:\Users\asisodiya\source\repos\Merchant Galaxy\Merchant Galaxy\obj\Debug\Merchant Galaxy.csproj.CoreCompileInputs.cache
+C:\Users\asisodiya\source\repos\Merchant Galaxy\Merchant Galaxy\obj\Debug\Merchant Galaxy.exe
+C:\Users\asisodiya\source\repos\Merchant Galaxy\Merchant Galaxy\obj\Debug\Merchant Galaxy.pdb
